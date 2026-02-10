@@ -1,0 +1,41 @@
+.app-form-card {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.app-form-sub {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+}
+
+.file-upload-area {
+    position: relative;
+}
+
+.file-upload-area input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-upload-label {
+    display: block;
+    padding: 0.9rem 1rem;
+    background: var(--bg-input);
+    border: 1.5px dashed var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-upload-label:hover {
+    border-color: var(--accent-user);
+    background: var(--glass);
+}

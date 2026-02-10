@@ -1,0 +1,85 @@
+.lr-filters {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.lr-status-tabs {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.lr-tab {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.lr-tab:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
+
+.lr-tab.active {
+    background: var(--accent-gradient);
+    color: #fff;
+    border-color: transparent;
+}
+
+/* Show More Detail Row */
+.detail-row td {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.detail-content {
+    padding: 1rem 1.5rem;
+    background: var(--glass);
+    border-radius: 0 0 12px 12px;
+    margin: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.detail-label-sm {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.detail-grid span {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+}
+
+.detail-mono {
+    font-family: 'Consolas', monospace;
+    font-size: 0.78rem !important;
+    opacity: 0.7;
+}
+
+/* Info icon button */
+.vlh-icon-btn-info {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.vlh-icon-btn-info:hover {
+    background: rgba(59, 130, 246, 0.2);
+}

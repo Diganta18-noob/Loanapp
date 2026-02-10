@@ -1,0 +1,88 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+}
+
+.modal-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+}
+
+.modal-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: rgba(248, 113, 113, 0.12);
+    color: var(--danger);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem auto;
+}
+
+.modal-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.modal-message {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.8rem;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+}
+
+.modal-btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+.modal-btn-danger:hover {
+    opacity: 0.9;
+}
+
+.modal-btn-cancel {
+    background: var(--glass);
+    color: var(--text-secondary);
+    border: 1px solid var(--glass-border);
+}
+
+.modal-btn-cancel:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
