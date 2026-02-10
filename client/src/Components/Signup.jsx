@@ -117,9 +117,13 @@ function Signup() {
     // Helper to render duplicate status indicator
     const renderDupeIcon = (field) => {
         const status = dupeStatus[field];
+        const value = form[field];
         if (!status) return null;
-        if (status === 'checking') return <span className="dupe-indicator checking">⏳</span>;
-        if (status === 'taken') return <span className="dupe-indicator taken"><FiAlertCircle /> Taken</span>;
+        if (status === 'checking') return <span className="dupe-indicator checking">⏳ Checking...</span>;
+        if (status === 'taken') {
+            const fieldLabel = field === 'userName' ? 'Username' : field === 'email' ? 'Email' : 'Mobile number';
+            return <span className="dupe-indicator taken"><FiAlertCircle /> {fieldLabel} '{value}' already exists</span>;
+        }
         if (status === 'available') return <span className="dupe-indicator available"><FiCheck /> Available</span>;
         return null;
     };
