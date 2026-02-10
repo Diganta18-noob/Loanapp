@@ -17,21 +17,39 @@ function LoanApplicationForm() {
     const [form, setForm] = useState({
         loanType: selectedLoan?.loanType || '',
         submissionDate: new Date().toISOString().split('T')[0],
-        income: '', model: '', purchasePrice: '', address: '', file: '',
+        income: '', model: '', purchasePrice: '', address: '',
     });
+    const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
 
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        // Clear error on type
+        if (errors[name]) {
+            setErrors(prev => {
+                const updated = { ...prev };
+                delete updated[name];
+                return updated;
+            });
+        }
+        setForm(prev => ({ ...prev, [name]: value }));
+    };
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setFileName(file.name);
-            const reader = new FileReader();
-            reader.onloadend = () => setForm((p) => ({ ...p, file: reader.result }));
-            reader.readAsDataURL(file);
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+            setFileName(selectedFile.name);
+            // Clear file error
+            if (errors.file) {
+                setErrors(prev => {
+                    const updated = { ...prev };
+                    delete updated.file;
+                    return updated;
+                });
+            }
         }
     };
 
@@ -42,7 +60,7 @@ function LoanApplicationForm() {
         if (!form.model) e.model = 'Required';
         if (!form.purchasePrice || Number(form.purchasePrice) <= 0) e.purchasePrice = 'Valid price required';
         if (!form.address) e.address = 'Required';
-        if (!form.file) e.file = 'Document required';
+        if (!file) e.file = 'Document required';
         setErrors(e);
         return Object.keys(e).length === 0;
     };
@@ -52,9 +70,19 @@ function LoanApplicationForm() {
         if (!validate()) return;
         setLoading(true);
         try {
-            await API.post('/loanApplication/add', {
-                ...form, userId: user?.id, userName: user?.userName,
-                income: Number(form.income), purchasePrice: Number(form.purchasePrice),
+            const formData = new FormData();
+            formData.append('loanType', form.loanType);
+            formData.append('submissionDate', form.submissionDate);
+            formData.append('income', Number(form.income));
+            formData.append('model', form.model);
+            formData.append('purchasePrice', Number(form.purchasePrice));
+            formData.append('address', form.address);
+            formData.append('userId', user?.id);
+            formData.append('userName', user?.userName);
+            formData.append('file', file);
+
+            await API.post('/loanApplication/add', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
             });
             toast.success('Application submitted!');
             navigate('/user/appliedLoans');

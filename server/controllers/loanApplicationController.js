@@ -61,10 +61,14 @@ const getLoanApplicationById = async (req, res) => {
     }
 };
 
-// Add a new loan application
+// Add a new loan application (with Multer file upload)
 const addLoanApplication = async (req, res) => {
     try {
-        const app = await LoanApplication.create(req.body);
+        const appData = { ...req.body };
+        if (req.file) {
+            appData.file = req.file.filename;
+        }
+        const app = await LoanApplication.create(appData);
         await createAuditLog({
             userId: req.body.userId, userName: req.body.userName,
             action: 'CREATE', entity: 'LoanApplication', entityId: app._id.toString(),

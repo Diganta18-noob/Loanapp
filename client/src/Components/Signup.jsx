@@ -1,29 +1,74 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { loginSuccess } from '../userSlice';
 import API from '../apiConfig';
 import { toast } from 'react-toastify';
-import { FiUser, FiMail, FiPhone, FiLock, FiUserPlus, FiShield } from 'react-icons/fi';
+import { FiUser, FiMail, FiPhone, FiLock, FiUserPlus, FiShield, FiCheck, FiAlertCircle } from 'react-icons/fi';
 import ThemeToggle from './ThemeToggle';
 import './Signup.css';
 
 function Signup() {
     const [form, setForm] = useState({ userName: '', email: '', mobile: '', password: '', confirmPassword: '', role: 'user' });
     const [errors, setErrors] = useState({});
+    const [dupeStatus, setDupeStatus] = useState({}); // { userName: 'checking'|'taken'|'available', ... }
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const timers = useRef({});
+
+    // Debounced duplicate check
+    const checkDuplicate = useCallback((field, value) => {
+        if (timers.current[field]) clearTimeout(timers.current[field]);
+
+        if (!value || value.trim() === '') {
+            setDupeStatus(prev => ({ ...prev, [field]: null }));
+            return;
+        }
+
+        // Minimum lengths before checking
+        if (field === 'userName' && value.length < 2) return;
+        if (field === 'email' && !/\S+@\S+\.\S+/.test(value)) return;
+        if (field === 'mobile' && value.length < 10) return;
+
+        setDupeStatus(prev => ({ ...prev, [field]: 'checking' }));
+
+        timers.current[field] = setTimeout(async () => {
+            try {
+                const res = await API.post('/user/checkDuplicate', { field, value });
+                setDupeStatus(prev => ({ ...prev, [field]: res.data.exists ? 'taken' : 'available' }));
+            } catch {
+                setDupeStatus(prev => ({ ...prev, [field]: null }));
+            }
+        }, 500);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        // Clear error for this field when user types
+        if (errors[name]) {
+            setErrors(prev => {
+                const updated = { ...prev };
+                delete updated[name];
+                return updated;
+            });
+        }
+
         if (name === 'mobile') {
             const numbersOnly = value.replace(/\D/g, '').slice(0, 10);
-            setForm({ ...form, mobile: numbersOnly });
+            setForm(prev => ({ ...prev, mobile: numbersOnly }));
+            checkDuplicate('mobile', numbersOnly);
             return;
         }
-        setForm({ ...form, [name]: value });
+
+        setForm(prev => ({ ...prev, [name]: value }));
+
+        // Trigger duplicate check for unique fields
+        if (['userName', 'email'].includes(name)) {
+            checkDuplicate(name, value);
+        }
     };
 
     const validate = () => {
@@ -36,6 +81,12 @@ function Signup() {
         if (!form.password) errs.password = 'Password is required';
         else if (form.password.length < 6) errs.password = 'Min 6 characters';
         if (form.password !== form.confirmPassword) errs.confirmPassword = 'Passwords do not match';
+
+        // Block if duplicates detected
+        if (dupeStatus.userName === 'taken') errs.userName = 'Username already taken';
+        if (dupeStatus.email === 'taken') errs.email = 'Email already registered';
+        if (dupeStatus.mobile === 'taken') errs.mobile = 'Mobile already in use';
+
         setErrors(errs);
         return Object.keys(errs).length === 0;
     };
@@ -61,6 +112,16 @@ function Signup() {
         } finally {
             setLoading(false);
         }
+    };
+
+    // Helper to render duplicate status indicator
+    const renderDupeIcon = (field) => {
+        const status = dupeStatus[field];
+        if (!status) return null;
+        if (status === 'checking') return <span className="dupe-indicator checking">⏳</span>;
+        if (status === 'taken') return <span className="dupe-indicator taken"><FiAlertCircle /> Taken</span>;
+        if (status === 'available') return <span className="dupe-indicator available"><FiCheck /> Available</span>;
+        return null;
     };
 
     return (
@@ -107,13 +168,15 @@ function Signup() {
                         <div className="vlh-form-group">
                             <label className="vlh-label"><FiUser /> Username</label>
                             <input name="userName" placeholder="Enter username" value={form.userName} onChange={handleChange}
-                                className={`vlh-input ${errors.userName ? 'vlh-input-error' : ''}`} />
+                                className={`vlh-input ${errors.userName ? 'vlh-input-error' : dupeStatus.userName === 'taken' ? 'vlh-input-error' : dupeStatus.userName === 'available' ? 'vlh-input-success' : ''}`} />
+                            {renderDupeIcon('userName')}
                             {errors.userName && <span className="vlh-error-text">{errors.userName}</span>}
                         </div>
                         <div className="vlh-form-group">
                             <label className="vlh-label"><FiMail /> Email</label>
                             <input name="email" type="email" placeholder="Enter email" value={form.email} onChange={handleChange}
-                                className={`vlh-input ${errors.email ? 'vlh-input-error' : ''}`} />
+                                className={`vlh-input ${errors.email ? 'vlh-input-error' : dupeStatus.email === 'taken' ? 'vlh-input-error' : dupeStatus.email === 'available' ? 'vlh-input-success' : ''}`} />
+                            {renderDupeIcon('email')}
                             {errors.email && <span className="vlh-error-text">{errors.email}</span>}
                         </div>
                     </motion.div>
@@ -125,7 +188,9 @@ function Signup() {
                         <div className="vlh-form-group">
                             <label className="vlh-label"><FiPhone /> Mobile</label>
                             <input name="mobile" placeholder="10-digit mobile" value={form.mobile} onChange={handleChange}
-                                className={`vlh-input ${errors.mobile ? 'vlh-input-error' : ''}`} />
+                                inputMode="numeric"
+                                className={`vlh-input ${errors.mobile ? 'vlh-input-error' : dupeStatus.mobile === 'taken' ? 'vlh-input-error' : dupeStatus.mobile === 'available' ? 'vlh-input-success' : ''}`} />
+                            {renderDupeIcon('mobile')}
                             {errors.mobile && <span className="vlh-error-text">{errors.mobile}</span>}
                         </div>
                         <div className="vlh-form-group">

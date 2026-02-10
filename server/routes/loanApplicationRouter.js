@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { validateToken } = require('../middleware/authUtils');
+const upload = require('../middleware/multerConfig');
 const {
     getAllLoanApplications,
     getLoanApplicationsByUserId,
@@ -13,7 +14,7 @@ const {
 router.post('/getAllLoanApplications', validateToken, getAllLoanApplications);
 router.get('/getLoanApplicationsByUserId/:userId', validateToken, getLoanApplicationsByUserId);
 router.get('/getById/:id', validateToken, getLoanApplicationById);
-router.post('/add', validateToken, addLoanApplication);
+router.post('/add', validateToken, upload.single('file'), addLoanApplication);
 router.put('/update/:id', validateToken, updateLoanApplication);
 router.delete('/delete/:id', validateToken, deleteLoanApplication);
 

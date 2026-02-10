@@ -131,14 +131,9 @@ function LoanRequest() {
                                                                         <span className="detail-label-sm">Document</span>
                                                                         <button className="doc-view-btn" onClick={() => {
                                                                             try {
-                                                                                const isBase64 = app.file.startsWith('data:');
-                                                                                if (isBase64) {
-                                                                                    const win = window.open();
-                                                                                    win.document.write(`<iframe src="${app.file}" frameborder="0" style="width:100%;height:100%;border:none;" allowfullscreen></iframe>`);
-                                                                                    win.document.title = 'Document Viewer';
-                                                                                } else {
-                                                                                    window.open(app.file, '_blank');
-                                                                                }
+                                                                                const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+                                                                                const fileUrl = `${baseUrl}/uploads/${app.file}`;
+                                                                                window.open(fileUrl, '_blank');
                                                                             } catch { toast.error('Could not open document'); }
                                                                         }}>📎 View Document</button>
                                                                     </div>
