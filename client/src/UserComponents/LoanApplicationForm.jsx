@@ -13,10 +13,11 @@ function LoanApplicationForm() {
     const navigate = useNavigate();
     const { user } = useSelector((state) => state.user);
     const selectedLoan = location.state?.loan || null;
+    const today = new Date().toISOString().split('T')[0];
 
     const [form, setForm] = useState({
         loanType: selectedLoan?.loanType || '',
-        submissionDate: new Date().toISOString().split('T')[0],
+        submissionDate: today,
         income: '', model: '', purchasePrice: '', address: '',
     });
     const [file, setFile] = useState(null);
@@ -115,7 +116,9 @@ function LoanApplicationForm() {
                             </div>
                             <div className="vlh-form-group">
                                 <label className="vlh-label">Submission Date</label>
-                                <input name="submissionDate" type="date" value={form.submissionDate} onChange={handleChange} className="vlh-input" />
+                                <input name="submissionDate" type="date" value={form.submissionDate} onChange={handleChange}
+                                    min={today}
+                                    className="vlh-input vlh-date-input" />
                             </div>
                         </motion.div>
 

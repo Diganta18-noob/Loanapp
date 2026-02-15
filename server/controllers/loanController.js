@@ -4,7 +4,7 @@ const { createAuditLog } = require('./auditLogController');
 // Get all loans
 const getAllLoans = async (req, res) => {
     try {
-        const loans = await Loan.find({});
+        const loans = await Loan.find({ isActive: true });
         res.status(200).json(loans);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -15,6 +15,9 @@ const getAllLoans = async (req, res) => {
 const getLoanById = async (req, res) => {
     try {
         const loan = await Loan.findById(req.params.id);
+        if (loan && !loan.isActive) {
+            return res.status(404).json({ message: 'Loan not found' });
+        }
         if (!loan) {
             return res.status(404).json({ message: 'Loan not found' });
         }
@@ -62,14 +65,16 @@ const updateLoan = async (req, res) => {
 // Delete a loan
 const deleteLoan = async (req, res) => {
     try {
-        const loan = await Loan.findByIdAndDelete(req.params.id);
-        if (!loan) {
+        const loan = await Loan.findById(req.params.id);
+        if (!loan || !loan.isActive) {
             return res.status(404).json({ message: 'Loan not found' });
         }
+        loan.isActive = false;
+        await loan.save();
         await createAuditLog({
             userId: req.userId, userName: 'Admin',
-            action: 'DELETE', entity: 'Loan', entityId: req.params.id,
-            details: `Deleted loan: ${loan.loanType}`,
+            action: 'SOFT_DELETE', entity: 'Loan', entityId: req.params.id,
+            details: `Soft-deleted loan: ${loan.loanType}`,
             ipAddress: req.ip,
         });
         res.status(200).json({ message: 'Loan deleted successfully' });

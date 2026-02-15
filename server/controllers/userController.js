@@ -5,7 +5,7 @@ const { generateToken } = require('../middleware/authUtils');
 const getUserByEmailAndPassword = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email, isActive: true });
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -21,6 +21,7 @@ const getUserByEmailAndPassword = async (req, res) => {
             userName: user.userName,
             role: user.role,
             token: token,
+            tokenType: 'Bearer',
             id: user._id,
         };
 

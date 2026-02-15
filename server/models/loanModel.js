@@ -24,6 +24,10 @@ const loanSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 const Loan = mongoose.model('Loan', loanSchema);

@@ -17,6 +17,8 @@ import ViewAllLoans from './UserComponents/ViewAllLoans';
 import LoanApplicationForm from './UserComponents/LoanApplicationForm';
 import AppliedLoans from './UserComponents/AppliedLoans';
 
+import Chatbot from './Chatbot/Chatbot';
+
 import './App.css';
 
 function App() {
@@ -49,8 +51,10 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
+      <Chatbot />
     </>
   );
 }
 
 export default App;
+

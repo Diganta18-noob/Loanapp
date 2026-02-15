@@ -21,11 +21,13 @@ const userRouter = require('./routes/userRouter');
 const loanRouter = require('./routes/loanRouter');
 const loanApplicationRouter = require('./routes/loanApplicationRouter');
 const auditLogRouter = require('./routes/auditLogRouter');
+const chatbotRouter = require('./routes/chatbotRouter');
 
 app.use('/user', userRouter);
 app.use('/loan', loanRouter);
 app.use('/loanApplication', loanApplicationRouter);
 app.use('/auditLog', auditLogRouter);
+app.use('/chatbot', chatbotRouter);
 
 app.get('/', (req, res) => {
     res.send('VehicleLoanHub API is running...');

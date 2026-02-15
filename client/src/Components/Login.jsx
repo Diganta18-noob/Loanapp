@@ -87,14 +87,14 @@ function Login() {
                     <motion.div className="vlh-form-group" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
                         <label className="vlh-label"><FiMail /> Email</label>
                         <input className={`vlh-input ${errors.email ? 'vlh-input-error' : ''}`}
-                            type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            type="email" placeholder="Enter your email" value={email} onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors(prev => ({ ...prev, email: '' })); }} />
                         {errors.email && <span className="vlh-error-text">{errors.email}</span>}
                     </motion.div>
 
                     <motion.div className="vlh-form-group" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
                         <label className="vlh-label"><FiLock /> Password</label>
                         <input className={`vlh-input ${errors.password ? 'vlh-input-error' : ''}`}
-                            type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            type="password" placeholder="Enter your password" value={password} onChange={(e) => { setPassword(e.target.value); if (errors.password) setErrors(prev => ({ ...prev, password: '' })); }} />
                         {errors.password && <span className="vlh-error-text">{errors.password}</span>}
                     </motion.div>
 

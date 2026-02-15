@@ -27,10 +27,9 @@ function Signup() {
             return;
         }
 
-        // Minimum lengths before checking
-        if (field === 'userName' && value.length < 2) return;
-        if (field === 'email' && !/\S+@\S+\.\S+/.test(value)) return;
-        if (field === 'mobile' && value.length < 10) return;
+        // Only check email duplicates
+        if (field !== 'email') return;
+        if (!/\S+@\S+\.\S+/.test(value)) return;
 
         setDupeStatus(prev => ({ ...prev, [field]: 'checking' }));
 
@@ -59,14 +58,13 @@ function Signup() {
         if (name === 'mobile') {
             const numbersOnly = value.replace(/\D/g, '').slice(0, 10);
             setForm(prev => ({ ...prev, mobile: numbersOnly }));
-            checkDuplicate('mobile', numbersOnly);
             return;
         }
 
         setForm(prev => ({ ...prev, [name]: value }));
 
-        // Trigger duplicate check for unique fields
-        if (['userName', 'email'].includes(name)) {
+        // Trigger duplicate check for email only
+        if (name === 'email') {
             checkDuplicate(name, value);
         }
     };
@@ -82,10 +80,8 @@ function Signup() {
         else if (form.password.length < 6) errs.password = 'Min 6 characters';
         if (form.password !== form.confirmPassword) errs.confirmPassword = 'Passwords do not match';
 
-        // Block if duplicates detected
-        if (dupeStatus.userName === 'taken') errs.userName = 'Username already taken';
+        // Block if email duplicate detected
         if (dupeStatus.email === 'taken') errs.email = 'Email already registered';
-        if (dupeStatus.mobile === 'taken') errs.mobile = 'Mobile already in use';
 
         setErrors(errs);
         return Object.keys(errs).length === 0;
@@ -172,8 +168,7 @@ function Signup() {
                         <div className="vlh-form-group">
                             <label className="vlh-label"><FiUser /> Username</label>
                             <input name="userName" placeholder="Enter username" value={form.userName} onChange={handleChange}
-                                className={`vlh-input ${errors.userName ? 'vlh-input-error' : dupeStatus.userName === 'taken' ? 'vlh-input-error' : dupeStatus.userName === 'available' ? 'vlh-input-success' : ''}`} />
-                            {renderDupeIcon('userName')}
+                                className={`vlh-input ${errors.userName ? 'vlh-input-error' : ''}`} />
                             {errors.userName && <span className="vlh-error-text">{errors.userName}</span>}
                         </div>
                         <div className="vlh-form-group">
@@ -193,8 +188,7 @@ function Signup() {
                             <label className="vlh-label"><FiPhone /> Mobile</label>
                             <input name="mobile" placeholder="10-digit mobile" value={form.mobile} onChange={handleChange}
                                 inputMode="numeric"
-                                className={`vlh-input ${errors.mobile ? 'vlh-input-error' : dupeStatus.mobile === 'taken' ? 'vlh-input-error' : dupeStatus.mobile === 'available' ? 'vlh-input-success' : ''}`} />
-                            {renderDupeIcon('mobile')}
+                                className={`vlh-input ${errors.mobile ? 'vlh-input-error' : ''}`} />
                             {errors.mobile && <span className="vlh-error-text">{errors.mobile}</span>}
                         </div>
                         <div className="vlh-form-group">

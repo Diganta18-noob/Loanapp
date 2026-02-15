@@ -39,3 +39,38 @@
     border-color: var(--accent-user);
     background: var(--glass);
 }
+
+/* ---- Date Input Styling ---- */
+.vlh-date-input {
+    cursor: pointer;
+    position: relative;
+    color-scheme: light;
+}
+
+.vlh-date-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    filter: invert(0);
+    transition: opacity 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.vlh-date-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.vlh-date-input:focus {
+    border-color: var(--accent-user);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* Dark theme date input */
+[data-theme="dark"] .vlh-date-input {
+    color-scheme: dark;
+}
+
+[data-theme="dark"] .vlh-date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

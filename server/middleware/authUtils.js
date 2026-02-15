@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const generateToken = (userId) => {
-    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h', algorithm: 'HS256' });
 };
 
 const validateToken = (req, res, next) => {
@@ -16,7 +16,7 @@ const validateToken = (req, res, next) => {
             return res.status(401).json({ message: 'Authentication failed - Invalid token format' });
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
         req.userId = decoded.userId;
         next();
     } catch (error) {

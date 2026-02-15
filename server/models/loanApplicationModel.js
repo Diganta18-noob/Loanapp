@@ -42,6 +42,10 @@ const loanApplicationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 const LoanApplication = mongoose.model('LoanApplication', loanApplicationSchema);
