@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=F59E0B&center=true&vCenter=true&width=700&lines=🤖+AI-Powered+Loan+Assistant;💳+Smart+Loan+Application+%26+Tracking;📊+Financial+Analytics+Dashboard;🔐+Secure+Document+Upload;💬+Groq+AI+Chatbot+Integration;📱+Modern+Material+UI+Design" alt="Typing SVG" /></a>
+  <a href="#"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=F59E0B&center=true&vCenter=true&width=700&lines=AI-Powered+Loan+Assistant;Smart+Loan+Application+%26+Tracking;Financial+Analytics+Dashboard;Secure+Document+Upload;Groq+AI+Chatbot+Integration;Modern+Material+UI+Design" alt="Typing SVG" /></a>
 </p>
 
 <p align="center">
@@ -38,6 +38,7 @@
 <td width="50%" align="center">
 
 ### 🤖 AI-Powered Chatbot
+
 Intelligent FAQ answering powered by<br/>
 **Groq SDK** + **Google Generative AI**<br/>
 Instant responses to loan queries
@@ -46,6 +47,7 @@ Instant responses to loan queries
 <td width="50%" align="center">
 
 ### 💳 Smart Loan Processing
+
 End-to-end loan lifecycle management<br/>
 Application → Review → Approval<br/>
 with real-time status tracking
@@ -56,6 +58,7 @@ with real-time status tracking
 <td width="50%" align="center">
 
 ### 📄 Document Management
+
 Secure file uploads via **Multer**<br/>
 Support income proofs, ID docs<br/>
 Automated document verification
@@ -64,6 +67,7 @@ Automated document verification
 <td width="50%" align="center">
 
 ### 🎨 Premium UI/UX
+
 Material UI v7 + Framer Motion<br/>
 Smooth animations & transitions<br/>
 Responsive across all devices
@@ -171,41 +175,41 @@ Loanapp/
 <tr>
 <td>
 
-| Tech | Purpose |
-|:----:|:-------:|
-| ⚛️ React 19 | UI Framework |
-| ⚡ Vite 7 | Build Tool |
-| 🧩 MUI v7 | Component Library |
-| 📦 Redux Toolkit | State Management |
-| 🎭 Framer Motion | Animations |
-| 🗺️ React Router 7 | Routing |
-| 🎯 React Icons | Icon Library |
-| 🔔 React Toastify | Notifications |
+|       Tech        |      Purpose      |
+| :---------------: | :---------------: |
+|    ⚛️ React 19    |   UI Framework    |
+|     ⚡ Vite 7     |    Build Tool     |
+|     🧩 MUI v7     | Component Library |
+| 📦 Redux Toolkit  | State Management  |
+| 🎭 Framer Motion  |    Animations     |
+| 🗺️ React Router 7 |      Routing      |
+|  🎯 React Icons   |   Icon Library    |
+| 🔔 React Toastify |   Notifications   |
 
 </td>
 <td>
 
-| Tech | Purpose |
-|:----:|:-------:|
-| 🚀 Express 5 | API Server |
-| 🍃 Mongoose 9 | MongoDB ODM |
-| 🔐 JWT | Auth Tokens |
-| 🔑 bcryptjs | Encryption |
-| 📎 Multer 2 | File Uploads |
-| 🔄 Axios | HTTP Client |
-| 🌐 CORS | Cross-Origin |
-| 📦 dotenv | Config |
+|     Tech      |   Purpose    |
+| :-----------: | :----------: |
+| 🚀 Express 5  |  API Server  |
+| 🍃 Mongoose 9 | MongoDB ODM  |
+|    🔐 JWT     | Auth Tokens  |
+|  🔑 bcryptjs  |  Encryption  |
+|  📎 Multer 2  | File Uploads |
+|   🔄 Axios    | HTTP Client  |
+|    🌐 CORS    | Cross-Origin |
+|   📦 dotenv   |    Config    |
 
 </td>
 <td>
 
-| Tech | Purpose |
-|:----:|:-------:|
-| 🧠 Groq SDK | AI Inference |
-| 🤖 Google Gen AI | NLP Engine |
-| 💬 Chatbot Module | User Support |
-| 📚 FAQ Seeder | Knowledge Base |
-| ⚙️ Nodemon | Dev Server |
+|       Tech        |    Purpose     |
+| :---------------: | :------------: |
+|    🧠 Groq SDK    |  AI Inference  |
+| 🤖 Google Gen AI  |   NLP Engine   |
+| 💬 Chatbot Module |  User Support  |
+|   📚 FAQ Seeder   | Knowledge Base |
+|    ⚙️ Nodemon     |   Dev Server   |
 
 </td>
 </tr>
