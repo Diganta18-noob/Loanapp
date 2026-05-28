@@ -9,15 +9,16 @@ dotenv.config();
 const app = express();
 
 const originsEnv = process.env.CORS_ORIGINS || process.env.CORS_ORIGIN;
+const defaultOrigins = [
+  "http://localhost:5173",
+  "http://192.168.29.207:5173",
+  "http://192.168.29.207:5000",
+  "https://loanapp-car.vercel.app",
+  "https://vehicles-loan.vercel.app",
+];
 const allowedOrigins = originsEnv
-  ? originsEnv.split(",")
-  : [
-      "http://localhost:5173",
-      "http://192.168.29.207:5173",
-      "http://192.168.29.207:5000",
-      "https://loanapp-car.vercel.app",
-      "https://vehicles-loan.vercel.app",
-    ];
+  ? [...new Set([...originsEnv.split(","), ...defaultOrigins])]
+  : defaultOrigins;
 
 const corsOptions = {
   origin: allowedOrigins,
