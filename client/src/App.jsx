@@ -41,12 +41,18 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
           <Route path="/admin/loanForm" element={<PrivateRoute requiredRole="admin"><LoanForm /></PrivateRoute>} />
+          <Route path="/admin/loanform" element={<PrivateRoute requiredRole="admin"><LoanForm /></PrivateRoute>} />
           <Route path="/admin/viewLoans" element={<PrivateRoute requiredRole="admin"><ViewLoans /></PrivateRoute>} />
+          <Route path="/admin/viewloans" element={<PrivateRoute requiredRole="admin"><ViewLoans /></PrivateRoute>} />
           <Route path="/admin/loanRequests" element={<PrivateRoute requiredRole="admin"><LoanRequest /></PrivateRoute>} />
+          <Route path="/admin/loanrequests" element={<PrivateRoute requiredRole="admin"><LoanRequest /></PrivateRoute>} />
 
           <Route path="/user/viewAllLoans" element={<PrivateRoute requiredRole="user"><ViewAllLoans /></PrivateRoute>} />
+          <Route path="/user/viewallloans" element={<PrivateRoute requiredRole="user"><ViewAllLoans /></PrivateRoute>} />
           <Route path="/user/applyLoan" element={<PrivateRoute requiredRole="user"><LoanApplicationForm /></PrivateRoute>} />
+          <Route path="/user/applyloan" element={<PrivateRoute requiredRole="user"><LoanApplicationForm /></PrivateRoute>} />
           <Route path="/user/appliedLoans" element={<PrivateRoute requiredRole="user"><AppliedLoans /></PrivateRoute>} />
+          <Route path="/user/appliedloans" element={<PrivateRoute requiredRole="user"><AppliedLoans /></PrivateRoute>} />
 
           <Route path="*" element={<ErrorPage />} />
         </Routes>
