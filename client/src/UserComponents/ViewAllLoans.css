@@ -1,74 +1,116 @@
 .loans-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
 }
 
 .loan-card {
-    cursor: default;
+  cursor: default;
 }
 
 .loan-card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .loan-card-icon {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .loan-card-header h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
 }
 
 .loan-card-desc {
-    color: var(--text-secondary);
-    font-size: 0.88rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .loan-card-details {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .loan-detail {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .detail-label {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
 }
 
 .detail-value {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .detail-value.rate {
-    color: var(--success);
+  color: var(--success);
 }
 
 .apply-btn {
-    width: 100%;
+  width: 100%;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .loans-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+}
+
+/* Tablet portrait & large phones */
 @media (max-width: 768px) {
-    .loans-grid {
-        grid-template-columns: 1fr;
-    }
+  .loans-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .loan-card-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .loan-card-desc {
+    font-size: 0.82rem;
+  }
+
+  .loan-card-details {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .detail-value {
+    font-size: 1rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .loan-card-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .loan-card-details {
+    gap: 0.8rem;
+  }
+
+  .detail-value {
+    font-size: 0.92rem;
+  }
 }

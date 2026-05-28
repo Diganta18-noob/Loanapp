@@ -94,8 +94,14 @@ function Signup() {
         try {
             const { confirmPassword, ...data } = form;
             await API.post('/user/register', data);
-            toast.success('Account Created!');
+            toast.success('Account Created Successfully!');
+        } catch (error) {
+            toast.error(error.response?.data?.message || 'Registration Failed');
+            setLoading(false);
+            return;
+        }
 
+        try {
             // Auto-login after signup
             const loginRes = await API.post('/user/login', { email: form.email, password: form.password });
             dispatch(loginSuccess(loginRes.data));
@@ -104,7 +110,8 @@ function Signup() {
             if (loginRes.data.role === 'admin') navigate('/admin/viewLoans');
             else navigate('/user/viewAllLoans');
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Registration Failed');
+            toast.info('Please log in with your new account.');
+            navigate('/login');
         } finally {
             setLoading(false);
         }

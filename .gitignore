@@ -1,0 +1,18 @@
+# Ignore local environment files
+.env
+.env.local
+server/.env
+client/.env
+
+# Ignore package directories
+node_modules/
+
+# Ignore frontend build outputs
+client/dist/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore user's local screenshots folder (kept locally, not pushed)
+srs img/

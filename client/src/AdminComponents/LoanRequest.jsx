@@ -167,8 +167,8 @@ function LoanRequest() {
                                                                         <Typography variant="caption" color="text.secondary" display="block" mb={0.5}>Document</Typography>
                                                                         <Button variant="outlined" size="small" onClick={() => {
                                                                             try {
-                                                                                const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-                                                                                setDocPreview(`${baseUrl}/uploads/${app.file}`);
+                                                                                 const baseUrl = import.meta.env.VITE_API_URL !== undefined ? import.meta.env.VITE_API_URL : (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
+                                                                                 setDocPreview(`${baseUrl}/uploads/${app.file}`);
                                                                             } catch { toast.error('Error'); }
                                                                         }}>View Document</Button>
                                                                     </Box>

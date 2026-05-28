@@ -143,21 +143,122 @@
   text-decoration: underline;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .login-left {
+    padding: 2rem;
+  }
+
+  .login-right {
+    padding: 2rem;
+  }
+
+  .login-brand h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Tablet portrait & large phones */
 @media (max-width: 768px) {
   .login-container {
     flex-direction: column;
   }
 
   .login-left {
-    padding: 2rem;
-    min-height: 40vh;
+    padding: 1.8rem 1.5rem 1.5rem;
+    min-height: auto;
+  }
+
+  .login-left::before {
+    width: 220px;
+    height: 220px;
+    top: -50px;
+    right: -50px;
+  }
+
+  .login-brand {
+    margin-bottom: 1.2rem;
+  }
+
+  .brand-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .login-brand h1 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+  }
+
+  .login-brand p {
+    font-size: 0.85rem;
+  }
+
+  .login-illustration {
+    gap: 0.6rem;
+  }
+
+  .floating-card {
+    padding: 0.8rem 0.9rem;
+    min-width: 85px;
+    border-radius: 12px;
+  }
+
+  .floating-card span {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .floating-card p {
+    font-size: 0.68rem;
   }
 
   .login-right {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .login-form h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Small phones — compact brand strip, no floating cards */
+@media (max-width: 480px) {
+  .login-left {
+    padding: 1.4rem 1rem 1.2rem;
+    min-height: auto;
+  }
+
+  .login-illustration {
+    display: none;
+  }
+
+  .login-brand {
+    margin-bottom: 0;
+  }
+
+  .brand-icon {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .login-brand h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-brand p {
+    font-size: 0.8rem;
+  }
+
+  .login-right {
+    padding: 1.8rem 1rem;
+  }
+
+  .login-form h2 {
+    font-size: 1.4rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
   }
 }

@@ -139,17 +139,106 @@
     border-radius: 3px 3px 0 0;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+    .signup-left {
+        padding: 2rem;
+        flex: 0.8;
+    }
+
+    .signup-right {
+        padding: 2rem;
+    }
+}
+
+/* Tablet portrait & large phones */
 @media (max-width: 768px) {
     .signup-container {
         flex-direction: column;
     }
 
     .signup-left {
-        padding: 2rem;
-        min-height: 30vh;
+        padding: 1.2rem 1rem;
+        min-height: auto;
+    }
+
+    .signup-left::before {
+        width: 180px;
+        height: 180px;
+        top: -50px;
+        right: -50px;
+    }
+
+    .signup-features {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+        width: 100%;
+    }
+
+    .feature-item {
+        padding: 0.65rem 0.9rem;
+        flex: 1;
+        min-width: 130px;
+        max-width: calc(50% - 0.3rem);
+    }
+
+    .feature-item span {
+        font-size: 1.2rem;
+    }
+
+    .feature-item h4 {
+        font-size: 0.8rem;
+    }
+
+    .feature-item p {
+        font-size: 0.7rem;
     }
 
     .signup-right {
-        padding: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .signup-form h2 {
+        font-size: 1.6rem;
+    }
+
+    .role-picker {
+        gap: 0.5rem;
+    }
+
+    .role-card {
+        padding: 0.6rem 0.4rem;
+    }
+}
+
+/* Small phones — hide left panel entirely, just show form */
+@media (max-width: 480px) {
+    .signup-left {
+        display: none;
+    }
+
+    .signup-right {
+        padding: 2rem 1rem;
+        min-height: 100vh;
+        align-items: flex-start;
+        padding-top: 3rem;
+    }
+
+    .signup-form {
+        width: 100%;
+    }
+
+    .signup-form h2 {
+        font-size: 1.5rem;
+    }
+
+    .role-icon {
+        font-size: 1.2rem;
+    }
+
+    .role-title {
+        font-size: 0.75rem;
     }
 }

@@ -1,22 +1,55 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FiArrowRight, FiShield, FiClock, FiTrendingDown } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiArrowRight, FiShield, FiClock, FiTrendingDown, FiMenu, FiX } from 'react-icons/fi';
 import ThemeToggle from './ThemeToggle';
 import './HomePage.css';
 
 function HomePage() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <motion.div className="home-container"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         >
             <nav className="home-nav">
                 <div className="home-nav-brand">🚗 VehicleLoanHub</div>
+
+                {/* Desktop nav */}
                 <div className="home-nav-links">
                     <ThemeToggle />
                     <Link to="/login" className="nav-link">Login</Link>
                     <Link to="/signup" className="nav-btn-primary">Get Started</Link>
                 </div>
+
+                {/* Mobile nav right */}
+                <div className="home-nav-mobile-right">
+                    <ThemeToggle />
+                    <button
+                        className="home-nav-hamburger"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {menuOpen ? <FiX /> : <FiMenu />}
+                    </button>
+                </div>
             </nav>
+
+            {/* Mobile dropdown */}
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.div
+                        className="home-mobile-menu"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <Link to="/login" className="home-mobile-link" onClick={() => setMenuOpen(false)}>Login</Link>
+                        <Link to="/signup" className="home-mobile-link home-mobile-primary" onClick={() => setMenuOpen(false)}>Get Started</Link>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <section className="hero-section">
                 <motion.div className="hero-content"

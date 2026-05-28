@@ -27,6 +27,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    white-space: nowrap;
 }
 
 .home-nav-links {
@@ -64,6 +65,81 @@
     box-shadow: 0 6px 20px var(--accent-glow);
 }
 
+/* Mobile nav right (hidden on desktop) */
+.home-nav-mobile-right {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* Hamburger button */
+.home-nav-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.home-nav-hamburger:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+}
+
+/* Mobile Dropdown Menu */
+.home-mobile-menu {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(20px);
+    padding: 0.6rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.home-mobile-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.home-mobile-link:hover {
+    background: var(--glass);
+    color: var(--text-primary);
+}
+
+.home-mobile-primary {
+    background: var(--accent-gradient);
+    color: #fff !important;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.home-mobile-primary:hover {
+    box-shadow: 0 4px 16px var(--accent-glow);
+    background: var(--accent-gradient) !important;
+}
+
+/* ---- Hero ---- */
 .hero-section {
     display: flex;
     align-items: center;
@@ -222,6 +298,7 @@
     margin: 2px 0 0 0;
 }
 
+/* ---- Features ---- */
 .features-section {
     padding: 5rem 4rem;
     text-align: center;
@@ -277,6 +354,7 @@
     line-height: 1.6;
 }
 
+/* ---- Footer ---- */
 .home-footer {
     text-align: center;
     padding: 2.5rem;
@@ -285,42 +363,214 @@
     font-size: 0.85rem;
 }
 
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .home-nav {
+        padding: 1rem 2rem;
+    }
+
+    .hero-section {
+        padding: 7rem 2rem 4rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .features-section {
+        padding: 4rem 2rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+    }
+
+    .hero-section::before {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+/* Tablet portrait & large phones */
 @media (max-width: 768px) {
     .home-nav {
-        padding: 1rem 1.5rem;
+        padding: 0.8rem 1.2rem;
+        height: 56px;
+    }
+
+    .home-nav-brand {
+        font-size: 1.1rem;
+    }
+
+    /* Hide desktop nav links, show mobile right */
+    .home-nav-links {
+        display: none;
+    }
+
+    .home-nav-mobile-right {
+        display: flex;
+    }
+
+    .home-mobile-menu {
+        top: 56px;
     }
 
     .hero-section {
         flex-direction: column;
-        padding: 7rem 1.5rem 3rem;
+        padding: 6rem 1.2rem 2.5rem;
         text-align: center;
+        min-height: auto;
+    }
+
+    .hero-section::before {
+        width: 300px;
+        height: 300px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .hero-content>p {
         max-width: none;
+        font-size: 0.95rem;
     }
 
     .hero-actions {
         justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-btn-primary,
+    .hero-btn-secondary {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
     }
 
     .hero-stats {
         justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .stat-item h3 {
+        font-size: 1.4rem;
+    }
+
+    .stat-item p {
+        font-size: 0.75rem;
     }
 
     .hero-visual {
-        margin-top: 3rem;
+        margin-top: 2.5rem;
+        width: 100%;
     }
 
-    .features-grid {
-        grid-template-columns: 1fr;
+    .hero-card-stack {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .hero-glass-card {
+        padding: 1.1rem 1.4rem;
+        min-width: unset;
     }
 
     .features-section {
-        padding: 3rem 1.5rem;
+        padding: 2.5rem 1.2rem;
+    }
+
+    .features-section h2 {
+        font-size: 1.6rem;
+    }
+
+    /* 2-column features on tablet */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .feature-card {
+        padding: 1.8rem 1.5rem;
+    }
+
+    .home-footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.78rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .home-nav {
+        padding: 0 0.9rem;
+    }
+
+    .home-nav-brand {
+        font-size: 0.95rem;
+    }
+
+    .hero-section {
+        padding: 5.5rem 1rem 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content>p {
+        font-size: 0.88rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .hero-btn-primary,
+    .hero-btn-secondary {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-stats {
+        gap: 1.2rem;
+    }
+
+    .stat-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .hero-glass-card {
+        padding: 1rem 1.2rem;
+    }
+
+    .hgc-icon {
+        font-size: 1.5rem;
+    }
+
+    .features-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Single column on very small phones */
+    .features-grid {
+        grid-template-columns: 1fr;
     }
 }

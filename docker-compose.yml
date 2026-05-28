@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: loanapp-server
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/vehicle_loan_hub
+      - JWT_SECRET=production_jwt_secret_please_change_this_value_in_prod
+      # Use developer API key as placeholder; users must supply their own in production.
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - CORS_ORIGINS=http://localhost:5000
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    image: mongo:6.0
+    container_name: loanapp-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:

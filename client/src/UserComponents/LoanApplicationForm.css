@@ -1,76 +1,95 @@
 .app-form-card {
-    max-width: 750px;
-    margin: 0 auto;
+  max-width: 750px;
+  margin: 0 auto;
 }
 
 .app-form-sub {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    margin-bottom: 2rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 2rem;
 }
 
 .file-upload-area {
-    position: relative;
+  position: relative;
 }
 
 .file-upload-area input[type="file"] {
-    position: absolute;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    z-index: 2;
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .file-upload-label {
-    display: block;
-    padding: 0.9rem 1rem;
-    background: var(--bg-input);
-    border: 1.5px dashed var(--glass-border);
-    border-radius: 12px;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
+  display: block;
+  padding: 0.9rem 1rem;
+  background: var(--bg-input);
+  border: 1.5px dashed var(--glass-border);
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .file-upload-label:hover {
-    border-color: var(--accent-user);
-    background: var(--glass);
+  border-color: var(--accent-user);
+  background: var(--glass);
 }
 
 /* ---- Date Input Styling ---- */
 .vlh-date-input {
-    cursor: pointer;
-    position: relative;
-    color-scheme: light;
+  cursor: pointer;
+  position: relative;
+  color-scheme: light;
 }
 
 .vlh-date-input::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 0.6;
-    filter: invert(0);
-    transition: opacity 0.2s ease;
-    padding: 4px;
-    border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  filter: invert(0);
+  transition: opacity 0.2s ease;
+  padding: 4px;
+  border-radius: 4px;
 }
 
 .vlh-date-input::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
-    background: rgba(102, 126, 234, 0.1);
+  opacity: 1;
+  background: rgba(102, 126, 234, 0.1);
 }
 
 .vlh-date-input:focus {
-    border-color: var(--accent-user);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  border-color: var(--accent-user);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
 }
 
 /* Dark theme date input */
 [data-theme="dark"] .vlh-date-input {
-    color-scheme: dark;
+  color-scheme: dark;
 }
 
 [data-theme="dark"] .vlh-date-input::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+  filter: invert(1);
+}
+
+/* Tablet portrait & large phones */
+@media (max-width: 768px) {
+  .app-form-card {
+    max-width: 100%;
+  }
+
+  .app-form-sub {
+    font-size: 0.85rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .file-upload-label {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.82rem;
+  }
 }
