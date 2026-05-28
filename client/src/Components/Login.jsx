@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { loginSuccess } from '../userSlice';
@@ -10,12 +10,20 @@ import ThemeToggle from './ThemeToggle';
 import './Login.css';
 
 function Login() {
+    const { isAuthenticated, role } = useSelector((state) => state.user);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            if (role === 'admin') navigate('/admin/viewLoans');
+            else navigate('/user/viewAllLoans');
+        }
+    }, [isAuthenticated, role, navigate]);
 
     const validate = () => {
         const errs = {};

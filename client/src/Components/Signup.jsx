@@ -1,6 +1,6 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { loginSuccess } from '../userSlice';
 import API from '../apiConfig';
@@ -10,6 +10,7 @@ import ThemeToggle from './ThemeToggle';
 import './Signup.css';
 
 function Signup() {
+    const { isAuthenticated, role } = useSelector((state) => state.user);
     const [form, setForm] = useState({ userName: '', email: '', mobile: '', password: '', confirmPassword: '', role: 'user' });
     const [errors, setErrors] = useState({});
     const [dupeStatus, setDupeStatus] = useState({}); // { userName: 'checking'|'taken'|'available', ... }
@@ -17,6 +18,13 @@ function Signup() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const timers = useRef({});
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            if (role === 'admin') navigate('/admin/viewLoans');
+            else navigate('/user/viewAllLoans');
+        }
+    }, [isAuthenticated, role, navigate]);
 
     // Debounced duplicate check
     const checkDuplicate = useCallback((field, value) => {
